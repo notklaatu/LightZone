@@ -11,6 +11,8 @@
 
 // standard
 #include <cstring>
+#include <stdio.h>
+#include <cstdio>
 #ifdef DEBUG
 #include <iostream>
 #endif
