@@ -10,7 +10,9 @@
 #define LC_CPPUtils_H
 
 // standard
+#include <string.h>
 #include <cstring>
+#include <stdio.h>
 #include <cstdio>
 #ifdef DEBUG
 #include <iostream>
