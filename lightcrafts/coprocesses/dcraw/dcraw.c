@@ -62,11 +62,12 @@
 #else
 #define _(String) (String)
 #endif
-// #define fgetc getc_unlocked
 
 #if defined(DJGPP) || defined(__MINGW32__)
 #define fseeko fseek
 #define ftello ftell
+#else
+#define fgetc getc_unlocked
 #endif
 #ifdef __CYGWIN__
 #include <io.h>
