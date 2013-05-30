@@ -2,7 +2,6 @@
 
 #include <jni.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <math.h>
 #ifndef AUTO_DEP
 #include "javah/com_lightcrafts_utils_DCRaw.h"
