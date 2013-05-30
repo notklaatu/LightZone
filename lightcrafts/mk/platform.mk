@@ -62,6 +62,7 @@ RM:=			rm -fr
 ifeq ($(PLATFORM),MacOSX)
   MACOSX_DEPLOYMENT_TARGET:= 	$(shell sw_vers -productVersion | cut -d. -f-2)
   SDKROOT:=		$(shell xcodebuild -version -sdk macosx${MACOSX_DEPLOYMENT_TARGET} | sed -n '/^Path:/p' | sed 's/^Path: //')
+  PLATFORM_CFLAGS+=	-D_DARWIN_C_SOURCE
   ifndef EXECUTABLE
     PLATFORM_CFLAGS+=	-fPIC
   endif
