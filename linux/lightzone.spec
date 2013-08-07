@@ -10,7 +10,7 @@ Summary:	Open-source professional-level digital darkroom software
 Url:		http://lightzoneproject.org/
 Group:		Productivity/Graphics/Convertors 
 Source:		%{name}-%{version}.tar.bz2
-BuildRequires:	ant, autoconf, automake, nasm, gcc, gcc-c++, libtool, make, tidy, git, javahelp2
+BuildRequires:	ant, autoconf, automake, nasm, gcc, gcc-c++, libtool, make, tidy, git, javahelp2, libjpeg-turbo-devel, lcms2-devel, zlib-devel
 
 %if 0%{?fedora}
 BuildRequires: java-1.7.0-openjdk-devel, libX11-devel, xz-libs
