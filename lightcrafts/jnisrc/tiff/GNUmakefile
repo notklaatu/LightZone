@@ -2,7 +2,7 @@ ROOT:=		../../..
 COMMON_DIR:=	$(ROOT)/lightcrafts
 include		$(COMMON_DIR)/mk/platform.mk
 
-DEP_LIBS:=	zlib libtiff
+DEP_LIBS:=	libtiff
 
 ##
 # Build rules
