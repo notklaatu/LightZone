@@ -29,16 +29,11 @@ CFLAGS:=		$(MACOSX_ISYSROOT)
 # Cross-platform way to determine real path.  (Must not use := here!)
 REAL_PATH=		$(shell cd "$1" && pwd -P)
 
-# libtiff's configure script wants absolute (not relative) paths.
-ZLIB_PATH:=		$(call REAL_PATH,../zlib)
-
 CONFIG_OPTIONS:=	--disable-cxx \
 			--disable-dependency-tracking \
 			--disable-jpeg \
-			--disable-shared \
-			--with-zlib-lib-dir="$(ZLIB_PATH)/lib"
+			--disable-shared
 
-CONFIG_ZLIB:=		--with-zlib-include-dir
 CONFIG_CROSS:=		--host=$(CONFIG_HOST) --target=$(CONFIG_TARGET)
 
 ##
@@ -85,9 +80,6 @@ ifeq ($(UNIVERSAL),1)
 else
   CFLAGS+=			$(PLATFORM_CFLAGS)
 endif
-
-CONFIG_OPTIONS+= \
-	$(CONFIG_ZLIB)="$(ZLIB_PATH)/arch-$(PROCESSOR)/include"
 
 $(ARCH_MAKEFILES):
 	cd $(@D) && \

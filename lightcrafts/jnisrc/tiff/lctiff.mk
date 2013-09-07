@@ -19,7 +19,7 @@ else
   JNI_EXTRA_INCLUDES=	-Ilibtiff/arch-$(PROCESSOR)/include
 endif
 
-JNI_EXTRA_LDFLAGS:=	-L../jpeg/libjpeg/lib -Lzlib/lib -Llibtiff/lib
+JNI_EXTRA_LDFLAGS:=	-Llibtiff/lib
 JNI_EXTRA_LINK:=	-ltiff -lz -lLCJNI -lstdc++
 
 JAVAH_CLASSES:=		com.lightcrafts.image.libs.LCTIFFCommon \
