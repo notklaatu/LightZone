@@ -1,17 +1,25 @@
 #!/usr/bin/make -f
 
-include /usr/share/cdbs/1/rules/debhelper.mk
-
 JAVA_HOME=/usr/lib/jvm/default-java
 ANT_OPTIONS=-f linux/build.xml
 
-clean::
-	JAVA_HOME=$(JAVA_HOME) ant $(ANT_OPTIONS) clean
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	touch configure-stamp
 
-common-build-arch::
+build: build-stamp
+build-arch: build-stamp
+build-stamp: configure-stamp
+	dh_testdir
 	JAVA_HOME=$(JAVA_HOME) ant $(ANT_OPTIONS) jar
+	touch $@
 
-install/lightzone::
+install: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
 	# not using install file here because
 	# 1 - icon files have to be renamed
 	# 2 - some files are symlinks and they need to be followed. Install file just copies symlinks
@@ -27,4 +35,27 @@ install/lightzone::
 	cp -rpH $(CURDIR)/linux/products/dcraw $(CURDIR)/debian/lightzone/opt/lightzone/
 	cp -rpH $(CURDIR)/linux/products/*.jar $(CURDIR)/debian/lightzone/opt/lightzone/
 	cp -rpH $(CURDIR)/linux/products/*.so $(CURDIR)/debian/lightzone/opt/lightzone/
+
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+#	dh_installdocs
+#	dh_installexamples
+#	dh_install
+#	dh_installmenu
+#	dh_installman
+	dh_link
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+clean:
+	JAVA_HOME=$(JAVA_HOME) ant $(ANT_OPTIONS) clean
+	-$(RM) configure-stamp build-stamp
+
+binary: binary-arch
+.PHONY: build-arch build clean binary-arch binary install configure
 
