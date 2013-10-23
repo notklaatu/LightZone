@@ -3,7 +3,15 @@
 #
 
 Name:           lightzone
-Version:	4.1.0-0.2.beta2
+%if 0%{?centos_version}
+# Use Version: 4.1.0.beta2 for betas and Version: 4.1.0.0 for final,
+# since RPM sorts A-Z before 0-9
+Version:	4.1.0.beta2
+%else
+# rpm >= 4.10 supports "tilde version" from debian.
+# Use Version: 4.1.0~beta2 for betas and Version: 4.1.0 for final.
+Version:	4.1.0~beta2
+%endif
 Release:	0
 License:	BSD-3-Clause
 Summary:	Open-source professional-level digital darkroom software
