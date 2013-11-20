@@ -18,7 +18,7 @@ ifeq ($(PLATFORM),MacOSX)
 endif
 
 JNI_EXTRA_DEFINES:=	-DNO_JPEG -DNO_LCMS
-JNI_LINUX_DEFINES:=	#-Dfgetc=getc_unlocked
+JNI_LINUX_DEFINES:=	-Dfgetc=getc_unlocked
 JNI_MACOSX_DEFINES:=	$(JNI_LINUX_DEFINES)
 
 JNI_MACOSX_LINK:=	-single_module
