@@ -3,7 +3,7 @@
 package com.lightcrafts.platform.windows;
 
 import com.lightcrafts.app.Application;
-import com.lightcrafts.app.CheckForUpdate;
+// import com.lightcrafts.app.CheckForUpdate;
 import com.lightcrafts.app.ExceptionDialog;
 import com.lightcrafts.app.other.OtherApplication;
 import com.lightcrafts.app.other.WindowsApplication;
@@ -37,6 +37,9 @@ public final class WindowsLauncher {
      */
     public static void main( String[] args ) {
         System.setProperty("awt.useSystemAAFontSettings", "on");
+        if (System.getProperty("os.arch").endsWith("64")) {
+            System.setProperty("com.sun.media.jai.disableMediaLib", "true");
+        }
 
         final boolean lafCond = sun.swing.SwingUtilities2.isLocalDisplay();
         Object aaTextInfo = sun.swing.SwingUtilities2.AATextInfo.getAATextInfo(lafCond);
@@ -58,7 +61,7 @@ public final class WindowsLauncher {
 
             final String licenseText = "Open Source";
 
-            CheckForUpdate.start();
+            // CheckForUpdate.start();
             {
                 final SplashImage image = new SplashImage(
                     SplashImage.getDefaultSplashText( licenseText )
@@ -68,7 +71,7 @@ public final class WindowsLauncher {
                 Application.main( args );
                 SplashWindow.disposeSplash();
             }
-            CheckForUpdate.showAlertIfAvailable();
+            // CheckForUpdate.showAlertIfAvailable();
         }
         catch ( Throwable t ) {
             (new ExceptionDialog()).handle( t );
