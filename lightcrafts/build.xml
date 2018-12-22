@@ -41,15 +41,17 @@
 
   <property name="jai-classpath" value="lib/mlibwrapper_jai.jar"/>
 
-  <target name="resolve" depends="init-ivy">
-    <ivy:resolve file="${basedir}/ivy.xml"/>
-    <ivy:retrieve/>
-  </target>
-
   <property name="ivy.version" value="2.4.0"/>
   <property name="ivy.jar.dir" value="${basedir}/lib"/>
   <property name="ivy.jar.file"
             value="${ivy.jar.dir}/ivy.jar"/>
+
+  <property name="offline" value="true"/>
+
+  <target name="resolve" depends="init-ivy" unless="offline">
+    <ivy:resolve file="${basedir}/ivy.xml"/>
+    <ivy:retrieve/>
+  </target>
 
   <target name="download-ivy" unless="offline">
     <mkdir dir="${ivy.jar.dir}"/>
