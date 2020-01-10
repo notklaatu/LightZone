@@ -155,11 +155,6 @@ public final class MacOSXPlatform extends Platform {
     }
 
     @Override
-    public boolean moveFilesToTrash( String[] pathNames ) {
-        return MacOSXFileUtil.moveToTrash( pathNames );
-    }
-
-    @Override
     public void readyToOpenFiles() {
         MacOSXLauncher.readyToOpenFiles();
     }

@@ -2,13 +2,15 @@
 
 package com.lightcrafts.platform.windows;
 
-import java.io.IOException;
+import com.lightcrafts.image.types.ImageType;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import com.lightcrafts.image.types.ImageType;
 
 /**
  * Windows file utilities.
@@ -31,7 +33,7 @@ public final class WindowsFileUtil {
      * @return Returns said path or <code>null</code> if it could not be
      * determined.
      */
-    public static native String getFolderPathOf( int folderID );
+    static native String getFolderPathOf( int folderID );
 
     /**
      * Hide the given file so that it doesn't show up in Windows Explorer.
@@ -40,7 +42,7 @@ public final class WindowsFileUtil {
      *
      * @param fileName The name of the file to hide.
      */
-    public static native void hideFile( String fileName ) throws IOException;
+    static native void hideFile( String fileName ) throws IOException;
 
     /**
      * Checks whether the given {@link File} is a GUID.
@@ -48,7 +50,7 @@ public final class WindowsFileUtil {
      * @param file The {@link File} to check.
      * @return Returns <code>true</code> only if the {@link File} is a GUID.
      */
-    public static boolean isGUID( File file ) {
+    static boolean isGUID(@NotNull File file ) {
         return file.getName().startsWith( "::{" );
     }
 
@@ -58,18 +60,10 @@ public final class WindowsFileUtil {
      * @param path The full path of the file to check.
      * @return Returns <code>true</code> only if the file is a shortcut file.
      */
-    public static boolean isShortcut( String path ) {
+    @Contract(pure = true)
+    static boolean isShortcut(@NotNull String path ) {
         return path.endsWith( ".lnk" );
     }
-
-    /**
-     * Moves a set of files to the Recycle Bin.
-     *
-     * @param pathNames An array of the file(s) to move.  The file name(s) must
-     * all be full paths.
-     * @return Returns <code>true</code> only if the move succeeded.
-     */
-    public static native boolean moveToRecycleBin( String[] pathNames );
 
     /**
      * Display the native Windows open-file dialog to have the user select an

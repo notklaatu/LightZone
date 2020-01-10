@@ -151,11 +151,6 @@ public final class WindowsPlatform extends Platform {
     }
 
     @Override
-    public boolean moveFilesToTrash( String[] pathNames ) {
-        return WindowsFileUtil.moveToRecycleBin( pathNames );
-    }
-
-    @Override
     public void readyToOpenFiles() {
         if ( System.getProperty( "IDE" ) == null )
             WindowsLauncher.readyToOpenFiles();
